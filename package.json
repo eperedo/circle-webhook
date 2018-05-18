@@ -1,0 +1,20 @@
+{
+  "name": "dp6-api-builds",
+  "version": "1.0.0",
+  "description": "The api who trigger our builds",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "circle",
+    "ci",
+    "hapi"
+  ],
+  "author": "Eduardo P. Rivero",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "5.0.1",
+    "hapi": "17.4.0"
+  }
+}
