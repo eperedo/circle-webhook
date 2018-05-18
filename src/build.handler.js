@@ -2,13 +2,14 @@
 
 const { spawn } = require('child_process');
 const deploymentBranches = ['dev', 'production'];
-const pathProjects = '/Users/fullfactory/workspace';
+const homePath = process.env.HOME;
+const projectsPath = `${homePath}/node`;
 
 async function handler(request, h) {
 	const { branch, status, reponame } = request.payload.payload;
 	if (status === 'success') {
 		if (deploymentBranches.includes(branch)) {
-			const deploymentFile = `${pathProjects}/${reponame}/deployment.json`;
+			const deploymentFile = `${projectsPath}/${reponame}/deployment.json`;
 			const deploySh = spawn('sh', ['deployment.sh', deploymentFile, branch], {
 				cwd: __dirname,
 				env: Object.assign({}, process.env, { PATH: process.env.PATH + ':/usr/local/bin' }),
