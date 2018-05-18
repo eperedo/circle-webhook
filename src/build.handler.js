@@ -1,7 +1,6 @@
 'use strict';
 
 const { spawn } = require('child_process');
-// const program = require('commander');
 const deploymentBranches = ['dev', 'production'];
 const pathProjects = '/Users/fullfactory/workspace';
 
@@ -14,11 +13,12 @@ async function handler(request, h) {
 				cwd: __dirname,
 				env: Object.assign({}, process.env, { PATH: process.env.PATH + ':/usr/local/bin' }),
 			});
-			deploySh.stdout.on('data', (w) => {
-				console.log('D', w.toString());
-			});
 			deploySh.on('close', (code) => {
-				console.log('code', code);
+				if (code === 0) {
+					console.log(`Deployment in ${reponame} to branch: ${branch} on ${new Date()}`);
+				} else {
+					console.log(`Deployment failed: ${reponame} to branch: ${branch} on ${new Date()}`);
+				}
 			});
 			return h.response();
 		}
