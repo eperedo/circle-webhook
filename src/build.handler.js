@@ -2,12 +2,13 @@
 
 const { spawn } = require('child_process');
 const deploymentBranches = ['dev', 'production'];
+const allowedRepos = process.env.repositories.split(',');
 const homePath = process.env.HOME;
 const projectsPath = `${homePath}/node`;
 
 async function handler(request, h) {
 	const { branch, status, reponame } = request.payload.payload;
-	if (status === 'success') {
+	if (status === 'success' && allowedRepos.includes(reponame)) {
 		if (deploymentBranches.includes(branch)) {
 			const deploymentFile = `${projectsPath}/${reponame}/deployment.json`;
 			const deploySh = spawn('sh', ['deployment.sh', deploymentFile, branch], {
