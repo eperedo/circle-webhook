@@ -1,1 +1,1 @@
-pm2 deploy /Users/eduardo/workspace/courses/node-pm2-deploy/ecosystem.config.js production update
+pm2 deploy $1 $2 update
