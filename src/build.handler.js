@@ -16,7 +16,7 @@ const deploySh = spawn('sh', ['deployment.sh'], {
 	}),
 });
 
-deploySh.stdout.on('data', w => console.log(w));
+deploySh.stdout.on('data', w => console.log('PM2', w.toString()));
 
 deploySh.stderr.on('data', w => console.log(w.toString()));
 
