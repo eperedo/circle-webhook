@@ -14,7 +14,7 @@ async function handler(request, h) {
 		if (deploymentBranches.includes(branch)) {
 			// const deploymentFile = `${projectsPath}/${reponame}/source/deployment.json`;
 			const deploymentFile =
-				'/Users/eduardo/workspace/courses/node-pm2-deploy/www/app-1/source/ecosystem.config.js';
+				'/Users/eduardo/workspace/courses/node-pm2-deploy/www/app-1/source';
 			const { exec } = require('child_process');
 			exec(
 				`sh ${__dirname}/deployment.sh ${deploymentFile} ${branch}`,
