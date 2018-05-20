@@ -12,7 +12,7 @@ async function handler(request, h) {
 	const { branch, status, reponame } = request.payload.payload;
 	if (status === 'success' && allowedRepos.includes(reponame)) {
 		if (deploymentBranches.includes(branch)) {
-			const deploymentFile = `${projectsPath}/${reponame}/source/deployment.json`;
+			const deploymentFile = `${projectsPath}/${reponame}/source`;
 			const deploySh = spawn('sh', ['deployment.sh', deploymentFile, branch], {
 				cwd: __dirname,
 				env: Object.assign({}, process.env, {
