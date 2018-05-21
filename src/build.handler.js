@@ -9,7 +9,7 @@ const githubAppRunn = 'https://github.com/apprunn';
 
 async function handler(request, h) {
 	const { branch, status, reponame } = request.payload.payload;
-	const { branchName } = request.query;
+	console.log('Branch', branch, status, reponame);
 	const verifyBuild = branch === process.env.BUILD_ENV;
 	if (status === 'success' && allowedRepos.includes(reponame)) {
 		if (verifyBuild) {

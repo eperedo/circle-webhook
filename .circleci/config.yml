@@ -43,5 +43,11 @@ jobs:
 
 notify:
   webhooks:
-    - url: https://circle.eperedo.com/builds
-    - url: https://circle-prod.eperedo.com/builds
+    filters:
+      branches:
+        only: dev
+          - url: https://circle.eperedo.com/builds
+    filters:
+      branches:
+        only: production
+          - url: https://circle-prod.eperedo.com/builds
