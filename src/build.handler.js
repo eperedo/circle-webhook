@@ -2,7 +2,7 @@
 
 const axios = require('axios');
 const { spawn } = require('child_process');
-const deploymentBranches = ['dev', 'production'];
+const deploymentBranches = ['dev'];
 const allowedRepos = process.env.repositories.split(',');
 const homePath = process.env.HOME;
 const projectsPath = `${homePath}/node`;
@@ -41,10 +41,10 @@ async function handler(request, h) {
 					],
 				};
 				if (code === 0) {
-					slackMessage.text = `Deployment in ${reponame} to branch: ${branch} on ${new Date()}`;
+					slackMessage.text = `Successful deploy in ${reponame} to branch: ${branch} on ${new Date()}`;
 				} else {
 					slackMessage.color = 'danger';
-					slackMessage.text = `Deployment failed: ${reponame} to branch: ${branch} on ${new Date()}`;
+					slackMessage.text = `Failed deploy: ${reponame} to branch: ${branch} on ${new Date()}`;
 				}
 				await axios.post(process.env.SLACK_WEBHOOK_URL, slackMessage);
 			});
