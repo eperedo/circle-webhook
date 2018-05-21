@@ -2,7 +2,6 @@
 
 const axios = require('axios');
 const { spawn } = require('child_process');
-const deploymentBranches = ['dev'];
 const allowedRepos = process.env.repositories.split(',');
 const homePath = process.env.HOME;
 const projectsPath = `${homePath}/node`;
@@ -10,8 +9,10 @@ const githubAppRunn = 'https://github.com/apprunn';
 
 async function handler(request, h) {
 	const { branch, status, reponame } = request.payload.payload;
+	const { branchName } = request.query;
+	const verifyBuild = branch === process.env.BUILD_ENV;
 	if (status === 'success' && allowedRepos.includes(reponame)) {
-		if (deploymentBranches.includes(branch)) {
+		if (verifyBuild) {
 			const deploymentFile = `${projectsPath}/${reponame}/source`;
 			const deploySh = spawn('sh', ['deployment.sh', deploymentFile, branch], {
 				cwd: __dirname,

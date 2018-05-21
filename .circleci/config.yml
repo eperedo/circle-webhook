@@ -43,5 +43,5 @@ jobs:
 
 notify:
   webhooks:
-    # A list of hook hashes, containing the URL field
     - url: https://circle.eperedo.com/builds
+    - url: https://circle-prod.eperedo.com/builds
